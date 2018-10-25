@@ -5,3 +5,4 @@ This repo contains a bunch of python scripts I run on periodically on my system.
 # Current scripts:
 
 - `make_gif.py`: Creates a gif from a series of images (I use this for [home-assistant](https://home-assistant.io))
+- `save_gif.py`: Simply saves a gif.  I schedule this to run daily.
