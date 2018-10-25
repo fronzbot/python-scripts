@@ -55,7 +55,7 @@ def create_new_gif():
 
     # And now optimize the gif
     final = os.path.join(SAVE_DIR, 'output.gif')
-    is os.path.isfile(final):
+    if os.path.isfile(final):
         os.remove(final)
     command = "gifsicle -O3 --colors 128 --resize-width 512 {} > {}".format(output, final)
     #command = "convert {} -fuzz 15% -layers Optimize {}".format(output, final)
