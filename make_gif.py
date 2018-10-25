@@ -53,10 +53,9 @@ def backup_images():
 def create_new_gif():
     """Use imageio to create a gif."""
     output = os.path.join(SAVE_DIR, 'temp.gif')
-    framerate = int(MAX_IMAGES / TARGET_GIF_LENGTH)
-
     images = []
     files = get_sorted_files()
+    framerate = int(len(files) / TARGET_GIF_LENGTH)
 
     with imageio.get_writer(output, mode='I', fps=framerate) as writer:
         for filename in files:
