@@ -1,3 +1,7 @@
 make_gif:
   schedule:
-    hours: 2 
+     hours: 1
+
+save_gif:
+  schedule:
+     days: 1
