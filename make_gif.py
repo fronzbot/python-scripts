@@ -4,6 +4,8 @@ import time
 import shutil
 import imageio
 
+from logger import LOGGER
+
 # Edit these variables
 IMAGE_DIR = '/share/hass/raw_images'
 BACKUP_DIR = '/share/hass/backup'
@@ -30,7 +32,7 @@ def backup_images():
     # sort files based on date
     sortedfiles = get_sorted_files() 
 
-    print("Found {} images".format(len(sortedfiles)))
+    LOGGER.info("Found {} images".format(len(sortedfiles)))
     # Now check if we even need to bother backing up    
     delete_range = len(sortedfiles) - MAX_IMAGES
     if delete_range > 0:
@@ -43,10 +45,12 @@ def backup_images():
 
 def create_new_gif():
     """Use imageio to create a gif."""
+    LOGGER.info("Creating new gif")
     output = os.path.join(SAVE_DIR, 'temp.gif')
     images = []
     files = get_sorted_files()
     framerate = int(len(files) / TARGET_GIF_LENGTH)
+    LOGGER.info("Using framerate of {}".format(framerate))
 
     with imageio.get_writer(output, mode='I', fps=framerate) as writer:
         for filename in files:
