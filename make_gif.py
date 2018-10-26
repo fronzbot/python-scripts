@@ -12,10 +12,10 @@ BACKUP_DIR = '/share/hass/backup'
 SAVE_DIR = '/share/hass/gifs'
 
 # In seconds
-TARGET_GIF_LENGTH = 5
+TARGET_GIF_LENGTH = 10
 
 # Max number of images to use in a GIF
-MAX_IMAGES = 48
+MAX_IMAGES = 80 
 
 
 def get_sorted_files():
