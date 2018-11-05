@@ -15,7 +15,7 @@ SAVE_DIR = '/share/hass/gifs'
 TARGET_GIF_LENGTH = 10
 
 # Max number of images to use in a GIF
-MAX_IMAGES = 80 
+MAX_IMAGES = 60 
 
 
 def get_sorted_files():
@@ -35,6 +35,7 @@ def backup_images():
     LOGGER.info("Found {} images".format(len(sortedfiles)))
     # Now check if we even need to bother backing up    
     delete_range = len(sortedfiles) - MAX_IMAGES
+    LOGGER.info("Need to delete {} files".format(delete_range))
     if delete_range > 0:
         for index in range(0, delete_range):
             print("Backing up {}".format(sortedfiles[index]))
@@ -54,12 +55,16 @@ def create_new_gif():
 
     with imageio.get_writer(output, mode='I', fps=framerate) as writer:
         for filename in files:
-            image = imageio.imread(filename)
-            writer.append_data(image)
+            try:
+                image = imageio.imread(filename)
+                writer.append_data(image)
+            except ValueError as e:
+                LOGGER.error(e)
 
     # And now optimize the gif
     final = os.path.join(SAVE_DIR, 'output.gif')
     if os.path.isfile(final):
+        LOGGER.info("Removing {}".format(final))
         os.remove(final)
     command = "gifsicle -O3 --colors 128 --resize-width 512 {} > {}".format(output, final)
     #command = "convert {} -fuzz 15% -layers Optimize {}".format(output, final)

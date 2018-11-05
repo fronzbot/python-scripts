@@ -1,6 +1,6 @@
 make_gif:
   schedule:
-     minutes: 30
+    hours: 1
 
 save_gif:
   schedule:
