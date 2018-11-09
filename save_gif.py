@@ -3,7 +3,7 @@ import os
 import time
 import shutil
 
-from logger import LOGGER
+from pycron import LOGGER
 
 SOURCE_FILE = '/share/hass/gifs/output.gif'
 BACKUP_DIR = '/share/hass/gifs/old'
