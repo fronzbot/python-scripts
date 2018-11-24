@@ -7,15 +7,15 @@ import imageio
 from pycron import LOGGER
 
 # Edit these variables
-IMAGE_DIR = '/share/hass/raw_images'
+IMAGE_DIR = '/share/hass/raw_images2'
 BACKUP_DIR = '/share/hass/backup'
 SAVE_DIR = '/share/hass/gifs'
 
 # In seconds
-TARGET_GIF_LENGTH = 20
+TARGET_GIF_LENGTH = 15
 
 # Max number of images to use in a GIF
-MAX_IMAGES = 60 
+MAX_IMAGES = 48 
 
 
 def get_sorted_files():
@@ -66,7 +66,7 @@ def create_new_gif():
     if os.path.isfile(final):
         LOGGER.info("Removing {}".format(final))
         os.remove(final)
-    command = "gifsicle -O3 --colors 128 --resize-width 512 {} > {}".format(output, final)
+    command = "gifsicle -O3 --colors 256 --resize-width 512 {} > {}".format(output, final)
     #command = "convert {} -fuzz 15% -layers Optimize {}".format(output, final)
     os.system(command)
     os.remove(output)

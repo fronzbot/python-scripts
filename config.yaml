@@ -5,3 +5,7 @@ make_gif:
 save_gif:
   schedule:
      days: 1
+
+blink_picture:
+  schedule:
+     minutes: 30

@@ -6,7 +6,7 @@ import shutil
 from pycron import LOGGER
 
 SOURCE_FILE = '/share/hass/gifs/output.gif'
-BACKUP_DIR = '/share/hass/gifs/old'
+BACKUP_DIR = '/share/hass/gifs/old2'
 
 if os.path.isfile(SOURCE_FILE):
     timestamp = time.strftime("%Y_%m_%d")
