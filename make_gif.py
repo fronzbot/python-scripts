@@ -50,7 +50,7 @@ def create_new_gif():
     output = os.path.join(SAVE_DIR, 'temp.gif')
     images = []
     files = get_sorted_files()
-    framerate = int(len(files) / TARGET_GIF_LENGTH)
+    framerate = max(1, int(len(files) / TARGET_GIF_LENGTH))
     LOGGER.info("Using framerate of {}".format(framerate))
 
     with imageio.get_writer(output, mode='I', fps=framerate) as writer:
