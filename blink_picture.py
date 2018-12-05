@@ -5,7 +5,8 @@ from blinkpy import blinkpy
 
 CREDENTIALS = '/work/auth.json'
 SAVE_DIR = '/share/hass/raw_images2'
-CAMERA = 'Camera1'
+CAMERAS = ['Camera1', 'CameraKS']
+SAVE_CAMERAS = ['Camera1']
 
 
 def setup():
@@ -21,9 +22,12 @@ def setup():
 def save_picture(blink):
     """Take the picture."""
     timestamp = time.strftime("%Y%m%d_%H%M%S")
-    blink.cameras[CAMERA].snap_picture()
-    time.sleep(10)
-    blink.cameras[CAMERA].image_to_file('{}/{}_{}.jpg'.format(SAVE_DIR, CAMERA, timestamp))
+    for camera in CAMERAS:        
+        blink.cameras[camera].snap_picture()
+        time.sleep(10)
+
+    for camera in SAVE_CAMERAS:
+        blink.cameras[camera].image_to_file('{}/{}_{}.jpg'.format(SAVE_DIR, camera, timestamp))
 
 
 if __name__ == '__main__':
