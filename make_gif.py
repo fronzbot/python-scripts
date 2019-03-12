@@ -7,15 +7,16 @@ import imageio
 from pycron import LOGGER
 
 # Edit these variables
-IMAGE_DIR = '/share/hass/raw_images2'
-BACKUP_DIR = '/share/hass/backup'
-SAVE_DIR = '/share/hass/gifs'
+BASE_DIR = '/share/hass'
+IMAGE_DIR = os.path.join(BASE_DIR, 'raw_images2')
+BACKUP_DIR = os.path.join(BASE_DIR, 'backup')
+SAVE_DIR = os.path.join(BASE_DIR, 'gifs')
 
 # In seconds
 TARGET_GIF_LENGTH = 15
 
 # Max number of images to use in a GIF
-MAX_IMAGES = 48 
+MAX_IMAGES = 50 
 
 
 def get_sorted_files():
@@ -50,6 +51,10 @@ def create_new_gif():
     output = os.path.join(SAVE_DIR, 'temp.gif')
     images = []
     files = get_sorted_files()
+    black_frame = os.path.join(BASE_DIR, '01_black.jpg')
+    LOGGER.info("Appending two black frames to gif.")
+    files.append(black_frame)
+    files.append(black_frame)
     framerate = max(1, int(len(files) / TARGET_GIF_LENGTH))
     LOGGER.info("Using framerate of {}".format(framerate))
 
