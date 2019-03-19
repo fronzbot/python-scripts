@@ -13,7 +13,7 @@ BACKUP_DIR = os.path.join(BASE_DIR, 'backup')
 SAVE_DIR = os.path.join(BASE_DIR, 'gifs')
 
 # In seconds
-TARGET_GIF_LENGTH = 15
+TARGET_GIF_LENGTH = 10
 
 # Max number of images to use in a GIF
 MAX_IMAGES = 50 
@@ -52,9 +52,11 @@ def create_new_gif():
     images = []
     files = get_sorted_files()
     black_frame = os.path.join(BASE_DIR, '01_black.jpg')
-    LOGGER.info("Appending two black frames to gif.")
+    LOGGER.info("Appending three black frames to gif.")
     files.append(black_frame)
     files.append(black_frame)
+    files.append(black_frame)
+    LOGGER.info("Number of files: %s", len(files))
     framerate = max(1, int(len(files) / TARGET_GIF_LENGTH))
     LOGGER.info("Using framerate of {}".format(framerate))
 
@@ -82,3 +84,4 @@ def create_new_gif():
 if __name__ == '__main__':
     backup_images()
     create_new_gif()
+    LOGGER.info("Done.")
